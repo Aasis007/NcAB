@@ -5,61 +5,102 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.roshan.ncab.MapFragment">
 
+
+
     <com.google.android.gms.maps.MapView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/map"
+        android:layout_marginTop="30dp"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab_map"
+    <LinearLayout
+        android:layout_marginTop="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/search"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/editText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="@dimen/fab_margin"
-            app:backgroundTint="@android:color/white"
-            android:visibility="gone"
-            app:srcCompat="@drawable/flat" />
+            android:layout_weight="4"
+            android:hint="Search Location Here" />
+
+
+        <Button
+            android:id="@+id/search_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="Search" />
+
+    </LinearLayout>
+
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_hybrid"
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            android:layout_below="@+id/fab_map"
+            android:layout_above="@+id/fab_train"
             android:layout_margin="@dimen/fab_margin"
             app:backgroundTint="@android:color/white"
-            android:visibility="gone"
             app:srcCompat="@drawable/hybrid" />
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab_train"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_below="@+id/fab_hybrid"
-            android:layout_margin="@dimen/fab_margin"
-            app:backgroundTint="@android:color/white"
-            android:visibility="gone"
-            app:srcCompat="@drawable/terrain_icon" />
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab_statilte"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/fab_train"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="@dimen/fab_margin"
-            app:backgroundTint="@android:color/white"
-            android:visibility="gone"
-            app:srcCompat="@drawable/satelite" />
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/fab_map"
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/fab_train"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:layout_above="@id/fab_hybrid"
+        app:backgroundTint="@android:color/white"
+        app:srcCompat="@drawable/flat" />
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_alignParentBottom="true"
+        android:id="@+id/fab"
+        android:visibility="gone"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         app:backgroundTint="@android:color/white"
         app:srcCompat="@drawable/flat" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_statilte"
+        android:layout_width="wrap_content"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/fab"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:backgroundTint="@android:color/white"
+        app:srcCompat="@drawable/satelite" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_train"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_above="@+id/fab_statilte"
+        android:layout_margin="@dimen/fab_margin"
+        app:backgroundTint="@android:color/white"
+        app:srcCompat="@drawable/terrain_icon" />
+
+    <Button
+        android:id="@+id/btn_share_location"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/ic_menu_send"
+        android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>

@@ -1,0 +1,26 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.roshan.ncab.DriverList">
+
+  <android.support.v7.widget.Toolbar
+  android:id="@+id/toolbar"
+      android:title="Driver Data"
+  android:layout_width="match_parent"
+  android:layout_height="?attr/actionBarSize"
+  android:background="?attr/colorPrimaryDark"
+  app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+
+  <ListView
+      android:layout_below="@+id/toolbar"
+      android:id="@+id/listView"
+      android:scrollbarThumbVertical="@android:color/transparent"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+  </ListView>
+
+</RelativeLayout>

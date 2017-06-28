@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@color/colorPrimary"
+    android:scrollbarThumbVertical="@android:color/transparent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.roshan.ncab.DriverRegister">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RadioGroup
+            android:id="@+id/radio_group"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/rb_user"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text= "  User"/>
+
+            <RadioButton
+                android:id="@+id/rb_driver"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Driver"/>
+
+        </RadioGroup>
+
+        <EditText
+            android:inputType="text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Your  Username"
+            android:layout_marginTop="20dp"
+            android:id="@+id/user_name"/>
+
+        <EditText
+            android:inputType="textWebEmailAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Your Email"
+            android:layout_marginTop="20dp"
+            android:id="@+id/email"/>
+
+        <EditText
+            android:inputType="textPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Your Password"
+            android:layout_marginTop="20dp"
+            android:id="@+id/password"/>
+
+
+        <EditText
+            android:inputType="number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Your  Contact"
+            android:layout_marginTop="20dp"
+            android:id="@+id/phn_number"/>
+
+        <EditText
+            android:inputType="text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Licence number"
+            android:layout_marginTop="20dp"
+            android:id="@+id/licence"/>
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Register Here"
+            android:background="@color/colorAccent"
+            android:layout_margin="10dp"
+            android:id="@+id/btn_register"/>
+
+        <TextView
+            android:layout_margin="10dp"
+            android:id="@+id/txt_forgetpassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Forget your password?"
+            android:textColor="@color/colorAccent"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:layout_margin="10dp"
+            android:id="@+id/txt_alreadyuser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="Already Register? Sign in"
+            android:textAlignment="center"/>
+
+    </LinearLayout>
+</ScrollView>

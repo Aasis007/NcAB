@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:padding="10dp"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="driver name"
+        android:textSize="20sp"
+        android:textColor="@android:color/black"
+        android:id="@+id/driver_name"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="driver name"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:id="@+id/phone"/>
+    <TextView
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="driver name"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:id="@+id/email"/>
+    <TextView
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="driver name"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:id="@+id/txt_id"/>
+    <TextView
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="driver name"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:id="@+id/lat"/>
+    <TextView
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="driver name"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:id="@+id/lon"/>
+    <TextView
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="driver name"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:id="@+id/licence"/>
+
+</LinearLayout>

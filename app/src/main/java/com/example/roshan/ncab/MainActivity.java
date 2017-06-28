@@ -1,8 +1,11 @@
 package com.example.roshan.ncab;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
@@ -16,10 +19,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.messaging.FirebaseMessaging;
+
+import static com.example.roshan.ncab.BuildConfig.*;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     DrawerLayout drawer;
+    private FirebaseAuth auth;
+    private FirebaseAuth.AuthStateListener authListener;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +50,19 @@ public class MainActivity extends AppCompatActivity
                             , new MapFragment())
                     .commit();}
 
+        auth = FirebaseAuth.getInstance();
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
+        authListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user == null) {
+                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                    finish();
+                }
+            }
+        };
         final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -47,6 +72,15 @@ public class MainActivity extends AppCompatActivity
         //drawer.openDrawer(Gravity.RIGHT);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        TextView txtProfileName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.user_name);
+        SharedPreferences prefs=getSharedPreferences("LONGITUDE",Context.MODE_PRIVATE);
+        String email=prefs.getString("username",null);
+        txtProfileName.setText(email);
+
+        if (BuildConfig.BUILD_TYPE.equals("debug")) {
+            return;
+            // do something for a debug build
+        }
     }
 
     @Override
@@ -91,13 +125,29 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_camera) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            {
 
+                fragmentManager.beginTransaction()
+                        .replace(R.id.content_frame
+                                , new MapFragment())
+                        .commit();}
+        } else if (id == R.id.nav_gallery) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            {
+                fragmentManager.beginTransaction()
+                        .replace(R.id.content_frame
+                                , new DriverList())
+                        .commit();}
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
+            startActivity(new Intent(getApplicationContext(),Profile.class));
 
         } else if (id == R.id.nav_share) {
+            auth.signOut();
+            SharedPreferences sharedpreferences =getSharedPreferences("LONGITUDE", Context.MODE_PRIVATE);
+            sharedpreferences.edit().clear().commit();
 
         } else if (id == R.id.nav_send) {
 
@@ -107,4 +157,5 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }

@@ -1,7 +1,9 @@
 package com.example.roshan.ncab;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -14,15 +16,22 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-public class Profile extends AppCompatActivity {
+public class Profile extends AppCompatActivity implements ValueEventListener {
+    private DatabaseReference mDatabase;
     private Button btnChangeEmail, btnChangePassword, btnSendResetEmail, btnRemoveUser,
             changeEmail, changePassword, sendEmail,  signOut;
     private ProgressDialog progressdialog;
     private EditText oldEmail, newEmail, password;
-    //private ProgressBar progressBar;
     private FirebaseAuth.AuthStateListener authListener;
+
     private FirebaseAuth auth;
+    private DatabaseReference username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +45,8 @@ public class Profile extends AppCompatActivity {
 
         //get firebase auth instance
         auth = FirebaseAuth.getInstance();
-
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        username=mDatabase.child("Email");
         //get current user
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -230,6 +240,9 @@ public class Profile extends AppCompatActivity {
     //sign out method
     public void signOut() {
         auth.signOut();
+        SharedPreferences sharedpreferences =getSharedPreferences("LONGITUDE", Context.MODE_PRIVATE);
+        sharedpreferences.edit().clear().commit();
+
     }
 
     @Override
@@ -242,6 +255,7 @@ public class Profile extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         auth.addAuthStateListener(authListener);
+        username.addValueEventListener(this);
     }
 
     @Override
@@ -252,4 +266,23 @@ public class Profile extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onDataChange(DataSnapshot dataSnapshot) {
+
+        if (dataSnapshot.getValue(String .class)!=null){
+            String  key=dataSnapshot.getKey();
+
+            if (key.equals("Email")){
+                String username=dataSnapshot.getValue(String.class);
+                oldEmail.setText(username);
+                System.out.println("Text "+username);
+            }
+        }
+
+    }
+
+    @Override
+    public void onCancelled(DatabaseError databaseError) {
+
+    }
 }

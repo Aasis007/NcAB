@@ -17,15 +17,18 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 
 public class Register extends AppCompatActivity implements View.OnClickListener{
 
     private Button btn_register;
     private TextView txt_alreadyuser,txt_forgetpsw;
-    private EditText editTextemail,editTextpassword,editTextaddress,editid;
+    private EditText editTextemail,editTextpassword,editTextContact;
     private ProgressDialog progressdialog;
     private FirebaseAuth firebaseauth;
     private Firebase mref;
+    double lat;
+    double lon;
 
     private int id=0;
 
@@ -37,7 +40,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
         progressdialog = new ProgressDialog(this);
         firebaseauth= FirebaseAuth.getInstance();
         Firebase.setAndroidContext(this);
-        mref =new Firebase("https://fir-auth-f3cc8.firebaseio.com/");
+        mref =new Firebase("https://ncab-80692.firebaseio.com/");
         if(firebaseauth.getCurrentUser() != null){
             finish();
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
@@ -47,8 +50,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
         txt_alreadyuser=(TextView)findViewById(R.id.txt_alreadyuser);
         editTextemail=(EditText)findViewById(R.id.email);
         editTextpassword=(EditText)findViewById(R.id.password);
-        editTextaddress=(EditText)findViewById(R.id.address);
-        editid =(EditText)findViewById(R.id.edit_id);
+        editTextContact=(EditText)findViewById(R.id.phn_number);
         txt_forgetpsw=(TextView)findViewById(R.id.txt_forgetpassword);
         txt_forgetpsw.setOnClickListener(this);
         btn_register.setOnClickListener(this);
@@ -74,8 +76,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
     private void registerUser(){
         String email=editTextemail.getText().toString().trim();
         String password=editTextpassword.getText().toString().trim();
-        final String address=editTextaddress.getText().toString();
-        String id_text=editid.getText().toString();
+        final String contact=editTextContact.getText().toString();
         if (TextUtils.isEmpty(email)) {
 
             Toast.makeText(this, "Enter email", Toast.LENGTH_SHORT).show();
@@ -86,25 +87,16 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
             Toast.makeText(this, "Enter Password", Toast.LENGTH_SHORT).show();
      return;
         }
-        if (TextUtils.isEmpty(address)){
-            Toast.makeText(this, "Enter Your Address", Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(contact)){
+            Toast.makeText(this, "Enter Your Contact", Toast.LENGTH_SHORT).show();
         }
 
-//        mref.push().setValue(id);
-//        id++;
-//        Firebase child=mref.child("Address");
-//        Firebase child2=mref.child("Email");
-//        Firebase child3=mref.child("Password");
-//        child3.setValue(password);
-//        child2.setValue(email);
-//        child.setValue(address);
-//        mref.child("Driver"+id).child("Address").setValue(address);
-//        mref.child("Driver"+id).child("Email").setValue(email);
-//        id++;
-       // mref.child("Email").setValue(email);
+
         progressdialog.setMessage("Registering User...");
         progressdialog.show();
-//
+
+      //  mref.push().setValue(new Post(firebaseauth.getCurrentUser().getEmail(),0.0,0.0,contact,null,null));
+
         firebaseauth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
