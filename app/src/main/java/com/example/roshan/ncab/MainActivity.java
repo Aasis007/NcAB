@@ -148,6 +148,8 @@ public class MainActivity extends AppCompatActivity
             auth.signOut();
             SharedPreferences sharedpreferences =getSharedPreferences("LONGITUDE", Context.MODE_PRIVATE);
             sharedpreferences.edit().clear().commit();
+            SharedPreferences sharedPreferences =getSharedPreferences("TOKEN", Context.MODE_PRIVATE);
+            sharedpreferences.edit().clear().commit();
 
         } else if (id == R.id.nav_send) {
 

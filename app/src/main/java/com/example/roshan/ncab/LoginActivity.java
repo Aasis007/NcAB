@@ -145,6 +145,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                              editor.putLong("contact", contact);
                                             editor.putString("licence", licence);
                                             editor.putString("username", username);
+                                             editor.putString("current_email",firebaseauth.getCurrentUser().getEmail());
                                             editor.putString("id", id);
                                             editor.apply();
                                             final double lat1 = Double.longBitsToDouble(sharedpreferences.getLong("Latitude", 0));
@@ -157,6 +158,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                             System.out.println("Username: " + username);
                                             longitude = new LatLng(lat1, lng1);
                                             System.out.println("Longitude :" + longitude);
+
+                                             SharedPreferences sharedPreferences = getSharedPreferences("TOKEN", Context.MODE_PRIVATE);
+                                             String token = sharedPreferences.getString("token", null);
+                                             String current_email=sharedpreferences.getString("current_email",null);
+                                             System.out.println("Current User :"+current_email);
+                                             System.out.println("Token :"+token);
+                                             new Background(LoginActivity.this).execute("insert",token,current_email);
                                         }
                                     }
                                 }
